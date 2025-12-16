@@ -1,5 +1,15 @@
-﻿/** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'standalone', 
-};
-module.exports = nextConfig;
+{
+  "name": "pdf-translator-frontend",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "lucide-react": "^0.344.0"
+  }
+}
