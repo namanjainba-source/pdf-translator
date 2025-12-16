@@ -1,58 +1,78 @@
-﻿const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-const USE_MOCK = process.env.NEXT_PUBLIC_USE_MOCK_BACKEND === 'true';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export class TranslationError extends Error {
   statusCode: number;
   constructor(message: string, statusCode: number = 500) {
     super(message);
+    this.name = 'TranslationError';
     this.statusCode = statusCode;
   }
 }
 
 export async function translateDocument(file: File, targetLang: string): Promise<{ blob: Blob; filename: string }> {
-  if (USE_MOCK) {
-    console.warn("DEV PREVIEW: Using Mock Backend.");
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const dummyContent = `[MOCK] Translated content for ${file.name}`;
-        const blob = new Blob([dummyContent], { type: 'text/plain' });
-        resolve({ blob, filename: `mock_${file.name}.txt` });
-      }, 2000);
-    });
+  
+  // 1. Validate Configuration
+  if (!API_BASE_URL) {
+      throw new TranslationError("API Base URL is missing. Please check your .env file.", 0);
   }
-
-  if (!API_BASE_URL) throw new TranslationError("API Base URL not configured.", 0);
 
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('target_lang', targetLang);
+  formData.append('target_lang', targetLang); 
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 300000);
+    // 5-minute timeout for large PDF processing
+    const timeoutId = setTimeout(() => controller.abort(), 300000); 
+
+    // 2. Send Request to Real Backend
     const response = await fetch(`${API_BASE_URL}/translate`, {
       method: 'POST',
       body: formData,
       signal: controller.signal,
     });
+    
     clearTimeout(timeoutId);
 
+    // 3. Handle Errors
     if (!response.ok) {
-        if (response.status === 413) throw new TranslationError('File too large.', 413);
-        throw new TranslationError(`Translation failed (Error ${response.status})`, response.status);
+        if (response.status === 413) {
+            throw new TranslationError('File is too large. Server limit exceeded.', 413);
+        }
+        // Attempt to read JSON error message from backend
+        const errorData = await response.json().catch(() => ({}));
+        throw new TranslationError(errorData.error || `Server Error (${response.status})`, response.status);
     }
 
-    const disposition = response.headers.get('Content-Disposition');
-    let filename = `translated_${file.name}`;
-    if (disposition && disposition.indexOf('attachment') !== -1) {
-      const matches = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/.exec(disposition);
-      if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
-    }
+    // 4. Handle Success Response
+    const data = await response.json();
+    
+    if (data.download_url) {
+        // The backend returns a URL; fetch the file content from it
+        // Note: Ensure your Backend CORS settings allow this fetch if the URL is different
+        const fileResponse = await fetch(data.download_url);
+        
+        if (!fileResponse.ok) {
+            throw new TranslationError("Could not download the processed file.", fileResponse.status);
+        }
+        
+        const blob = await fileResponse.blob();
+        const filename = data.original_name ? `translated_${data.original_name}` : 'translated_document';
+        
+        return { blob, filename };
+    } 
+    
+    throw new TranslationError("Server responded, but provided no download link.", 500);
 
-    const blob = await response.blob();
-    return { blob, filename };
   } catch (error: any) {
-    if (error.name === 'AbortError') throw new TranslationError('Request timed out.', 408);
-    throw new TranslationError(error.message || 'Network error.', 0);
+    console.error("Translation API Error:", error);
+
+    if (error.name === 'AbortError') {
+        throw new TranslationError('Request timed out. The file might be taking too long to process.', 408);
+    }
+    if (error instanceof TranslationError) {
+        throw error;
+    }
+    throw new TranslationError('Network error. Unable to reach the backend server.', 0);
   }
 }
