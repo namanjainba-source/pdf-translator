@@ -1,1 +1,5 @@
-
+﻿{
+  "System": [{ "label": "Auto Detect", "code": "auto", "region": "System" }],
+  "European": [{ "label": "English", "code": "eng_Latn", "region": "European" }, { "label": "French", "code": "fra_Latn", "region": "European" }, { "label": "Spanish", "code": "spa_Latn", "region": "European" }],
+  "Indian": [{ "label": "Hindi", "code": "hin_Deva", "region": "Indian" }]
+}
