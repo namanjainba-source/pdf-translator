@@ -1,5 +1,84 @@
-﻿{
-  "System": [{ "label": "Auto Detect", "code": "auto", "region": "System" }],
-  "European": [{ "label": "English", "code": "eng_Latn", "region": "European" }, { "label": "French", "code": "fra_Latn", "region": "European" }, { "label": "Spanish", "code": "spa_Latn", "region": "European" }],
-  "Indian": [{ "label": "Hindi", "code": "hin_Deva", "region": "Indian" }]
+{
+  "System": [
+    { "label": "Auto Detect", "code": "auto", "region": "System" }
+  ],
+  "Popular": [
+    { "label": "English", "code": "eng_Latn", "region": "Popular" },
+    { "label": "Spanish", "code": "spa_Latn", "region": "Popular" },
+    { "label": "Chinese (Simplified)", "code": "zho_Hans", "region": "Popular" },
+    { "label": "Hindi", "code": "hin_Deva", "region": "Popular" },
+    { "label": "French", "code": "fra_Latn", "region": "Popular" },
+    { "label": "Arabic", "code": "ara_Arab", "region": "Popular" },
+    { "label": "Russian", "code": "rus_Cyrl", "region": "Popular" },
+    { "label": "Portuguese", "code": "por_Latn", "region": "Popular" },
+    { "label": "Indonesian", "code": "ind_Latn", "region": "Popular" }
+  ],
+  "European": [
+    { "label": "Albanian", "code": "sqi_Latn", "region": "European" },
+    { "label": "Bosnian", "code": "bos_Latn", "region": "European" },
+    { "label": "Bulgarian", "code": "bul_Cyrl", "region": "European" },
+    { "label": "Croatian", "code": "hrv_Latn", "region": "European" },
+    { "label": "Czech", "code": "ces_Latn", "region": "European" },
+    { "label": "Danish", "code": "dan_Latn", "region": "European" },
+    { "label": "Dutch", "code": "nld_Latn", "region": "European" },
+    { "label": "Estonian", "code": "est_Latn", "region": "European" },
+    { "label": "Finnish", "code": "fin_Latn", "region": "European" },
+    { "label": "German", "code": "deu_Latn", "region": "European" },
+    { "label": "Greek", "code": "ell_Grek", "region": "European" },
+    { "label": "Hungarian", "code": "hun_Latn", "region": "European" },
+    { "label": "Icelandic", "code": "isl_Latn", "region": "European" },
+    { "label": "Irish", "code": "gle_Latn", "region": "European" },
+    { "label": "Italian", "code": "ita_Latn", "region": "European" },
+    { "label": "Latvian", "code": "lav_Latn", "region": "European" },
+    { "label": "Lithuanian", "code": "lit_Latn", "region": "European" },
+    { "label": "Macedonian", "code": "mkd_Cyrl", "region": "European" },
+    { "label": "Maltese", "code": "mlt_Latn", "region": "European" },
+    { "label": "Norwegian", "code": "nob_Latn", "region": "European" },
+    { "label": "Polish", "code": "pol_Latn", "region": "European" },
+    { "label": "Romanian", "code": "ron_Latn", "region": "European" },
+    { "label": "Serbian", "code": "srp_Cyrl", "region": "European" },
+    { "label": "Slovak", "code": "slk_Latn", "region": "European" },
+    { "label": "Slovenian", "code": "slv_Latn", "region": "European" },
+    { "label": "Swedish", "code": "swe_Latn", "region": "European" },
+    { "label": "Turkish", "code": "tur_Latn", "region": "European" },
+    { "label": "Ukrainian", "code": "ukr_Cyrl", "region": "European" },
+    { "label": "Welsh", "code": "cym_Latn", "region": "European" }
+  ],
+  "Asian": [
+    { "label": "Bengali", "code": "ben_Beng", "region": "Asian" },
+    { "label": "Burmese", "code": "mya_Mymr", "region": "Asian" },
+    { "label": "Chinese (Traditional)", "code": "zho_Hant", "region": "Asian" },
+    { "label": "Gujarati", "code": "guj_Gujr", "region": "Asian" },
+    { "label": "Japanese", "code": "jpn_Jpan", "region": "Asian" },
+    { "label": "Kannada", "code": "kan_Knda", "region": "Asian" },
+    { "label": "Khmer", "code": "khm_Khmr", "region": "Asian" },
+    { "label": "Korean", "code": "kor_Hang", "region": "Asian" },
+    { "label": "Lao", "code": "lao_Laoo", "region": "Asian" },
+    { "label": "Malay", "code": "zsm_Latn", "region": "Asian" },
+    { "label": "Malayalam", "code": "mal_Mlym", "region": "Asian" },
+    { "label": "Marathi", "code": "mar_Deva", "region": "Asian" },
+    { "label": "Nepali", "code": "npi_Deva", "region": "Asian" },
+    { "label": "Punjabi", "code": "pan_Guru", "region": "Asian" },
+    { "label": "Sinhala", "code": "sin_Sinh", "region": "Asian" },
+    { "label": "Tamil", "code": "tam_Taml", "region": "Asian" },
+    { "label": "Telugu", "code": "tel_Telu", "region": "Asian" },
+    { "label": "Thai", "code": "tha_Thai", "region": "Asian" },
+    { "label": "Urdu", "code": "urd_Arab", "region": "Asian" },
+    { "label": "Vietnamese", "code": "vie_Latn", "region": "Asian" }
+  ],
+  "African": [
+    { "label": "Afrikaans", "code": "afr_Latn", "region": "African" },
+    { "label": "Amharic", "code": "amh_Ethi", "region": "African" },
+    { "label": "Hausa", "code": "hau_Latn", "region": "African" },
+    { "label": "Igbo", "code": "ibo_Latn", "region": "African" },
+    { "label": "Somali", "code": "som_Latn", "region": "African" },
+    { "label": "Swahili", "code": "swh_Latn", "region": "African" },
+    { "label": "Yoruba", "code": "yor_Latn", "region": "African" },
+    { "label": "Zulu", "code": "zul_Latn", "region": "African" }
+  ],
+  "Middle Eastern": [
+    { "label": "Farsi (Persian)", "code": "pes_Arab", "region": "Middle Eastern" },
+    { "label": "Hebrew", "code": "heb_Hebr", "region": "Middle Eastern" },
+    { "label": "Pashto", "code": "pbt_Arab", "region": "Middle Eastern" }
+  ]
 }
